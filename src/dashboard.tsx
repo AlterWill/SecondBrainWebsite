@@ -1,8 +1,23 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-
-function Dashboard({notes}){
+function Dashboard({user}){
   const navigate = useNavigate();
+  const [notes,setNotes] = useState<{title:string,note:string}[]>([])
+  const url:string = 'http://localhost:3000/home'
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let res = await axios.get(url);
+      if(res.status!=200) {
+        alert('couldn\'t fetch'); return 
+      }
+      setNotes(res.data)
+    }
+    fetchData();
+  },[])
+
   return (
     <div className="">
       <div className="p-10 flex flex-wrap gap-2 ">

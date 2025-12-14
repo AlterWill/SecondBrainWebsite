@@ -3,13 +3,15 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./login";
 import Dashboard from "./dashboard";
 import AddNote from "./addNotes";
-import { useState } from "react";
+import {  useState } from "react";
 
 function App() {
-  const [notes,setNotes] = useState([{"title":"default title","note":"notes written here"},{"title":"default title","note":"notes written here"}]);
-  function saveNotes(note){
-    setNotes([...notes,note])
+  const [userID,setUserID] = useState({});
+
+  function saveUserData(user){
+    setUserID(user)
   }
+
   return (
     <BrowserRouter>
       <div className="flex flex-col min-h-screen">
@@ -17,9 +19,9 @@ function App() {
         <div className="bg-black flex flex-1">
           <div className="min-w-40 bg-green-400">SideBar</div>
           <Routes>
-            <Route path="/" element={<Login />}></Route>
-            <Route path="/add" element={<AddNote saveNotes={saveNotes} />}></Route>
-            <Route path="/home" element={ <Dashboard notes={notes}/> }></Route>
+            <Route path="/" element={<Login saveUserData={saveUserData}/>}></Route>
+            <Route path="/add" element={<AddNote userData={userID} />}></Route>
+            <Route path="/home" element={ <Dashboard userData={userID}/> }></Route>
           </Routes>
         </div>
         <div className="bg-blue-400 min-h-20">Footer</div>
