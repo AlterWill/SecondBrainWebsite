@@ -5,7 +5,7 @@ import axios from "axios";
 function Dashboard({user}){
   const navigate = useNavigate();
   const [notes,setNotes] = useState<{title:string,note:string}[]>([])
-  const url:string = 'http://localhost:3000/home'
+  const url:string = 'http://localhost:3000/content/home'
 
   useEffect(() => {
     const fetchData = async () => {

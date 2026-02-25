@@ -1,19 +1,18 @@
 import { useRef, useState } from "react";
 
-function Login() {
+function Login({saveUserId}) {
   const [UserData,setUserData] = useState(null);
-  const usernameRef = useRef();
-  const passwordRef = useRef();
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
 
   function inputData(){
-    if(usernameRef.current.value == "" ||  passwordRef.current.value == ""){
+    if(!usernameRef.current ||  passwordRef.current ){
       alert("enter value");
       return
     }
-    setUserData({
-      username: usernameRef.current.value,
-      password: passwordRef.current.value,
-    });
+    
+//fetch request here
+
     usernameRef.current.value = ""
     passwordRef.current.value = ""
   }
